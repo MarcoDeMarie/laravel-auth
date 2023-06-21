@@ -15,9 +15,11 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::paginate(10);
-        return view('admin.posts.index', compact('posts'));
+        $direction = 'desc';
+        $posts = Post::all();
+        return view('admin.posts.index', compact('posts', 'direction'));
     }
+
 
     /**
      * Show the form for creating a new resource.

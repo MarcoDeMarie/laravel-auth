@@ -10,7 +10,7 @@
     <table class="table table-striped table-hover">
         <thead>
         <tr>
-            <th scope="col">#ID</th>
+            <th scope="col"><a href="{{ route('admin.orderby',['direction'=>$direction ] ) }}" class="text->black"></a>#ID</th>
             <th scope="col">Titolo</th>
             <th scope="col">Data</th>
             <th scope="col">Azioni</th>
@@ -30,12 +30,6 @@
 
         </tbody>
     </table>
-
-    <div>
-        {{ $posts->Links()}}
-    </div>
-
-
 
 </div>
 
