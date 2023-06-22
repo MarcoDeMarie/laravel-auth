@@ -9,6 +9,20 @@ use Illuminate\Support\Str;
 class Post extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+
+        'title',
+        'slug',
+        'text',
+        'date',
+        'reading_time'
+
+    ];
+
+
+
+
     public static function generateSlug($str){
 
         $slug = Str::slug($str, '-');

@@ -7,10 +7,12 @@
         Posts
     </h2>
 
+
+
     <table class="table table-striped table-hover">
         <thead>
         <tr>
-            <th scope="col"><a href="{{ route('admin.orderby',['direction'=>$direction ] ) }}" class="text->black"></a>#ID</th>
+            <th scope="col">#ID</th>
             <th scope="col">Titolo</th>
             <th scope="col">Data</th>
             <th scope="col">Azioni</th>
@@ -22,7 +24,12 @@
             <tr>
                 <td>{{ $post->id }}</td>
                 <td>{{ $post->title }}</td>
-                <td>{{ $post->date }}</td>
+                @php
+
+                    $date = date_create($post->date);
+
+                @endphp
+                <td>{{ date_format($date, 'd/m/Y') }}</td>
                 <td>
                     <a href="{{ route('admin.posts.show', $post) }}" class="btn btn-success"><i class="fa-solid fa-eye"></i></a>
                     <a href="#" class="btn btn-primary"><i class="fa-solid fa-pencil"></i></i></a>

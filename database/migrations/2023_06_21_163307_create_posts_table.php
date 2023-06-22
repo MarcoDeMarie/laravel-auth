@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->text('text');
             $table->date('date');
-            $table->integer('reading-time')->nullable();
+            $table->integer('reading_time')->nullable();
             $table->timestamps();
         });
     }
