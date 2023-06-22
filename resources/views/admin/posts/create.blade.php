@@ -4,6 +4,19 @@
 
 <div class="container p-5">
 
+    @if ($errors->any())
+
+    <div class="alert alert-danger" role="alert">
+        <ul>
+            @foreach ($errors->all() as $error )
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+
+    </div>
+
+    @endif
+
     <h2>Creazione post</h2>
 
     <form action="{{ route('admin.posts.store') }}" method="POST">
@@ -16,10 +29,14 @@
                 type="text"
                 name="title"
                 value="{{ old('title') }}"
-                class="form-control"
+                class="form-control @error('title') is-invalid @enderror "
                 id="title"
                 placeholder="Titolo"
             >
+
+            @error('title')
+                <p class="text-danger">{{ $message }}</p>
+            @enderror
         </div>
 
         <div class="mb-3">
@@ -29,10 +46,14 @@
             <textarea
                 name="text"
                 id="text"
-                class="form-control"
+                class="form-control post-text"
                 cols="30"
                 rows="10"
                 >{{ old('title') }}</textarea>
+
+                @error('text')
+                    <p class="text-danger">{{ $message }}</p>
+                @enderror
 
         </div>
 

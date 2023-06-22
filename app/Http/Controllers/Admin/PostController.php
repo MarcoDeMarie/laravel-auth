@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Http\Requests\PostRequest;
 
 class PostController extends Controller
 {
@@ -37,7 +38,7 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
 
 
@@ -49,7 +50,6 @@ class PostController extends Controller
 
         $new_post = new Post();
         $new_post->fill($form_data);
-        // dd($new_post);
         $new_post->save();
 
         return redirect()->route('admin.posts.show', $new_post);
