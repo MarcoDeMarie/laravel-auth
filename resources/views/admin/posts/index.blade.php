@@ -23,8 +23,12 @@
                 <td>{{ $post->id }}</td>
                 <td>{{ $post->title }}</td>
                 <td>{{ $post->date }}</td>
-                <td><a href="#" class="btn btn-success"><i class="fa-solid fa-eye"></i></a></td>
-            </tr>
+                <td>
+                    <a href="{{ route('admin.posts.show', $post) }}" class="btn btn-success"><i class="fa-solid fa-eye"></i></a>
+                    <a href="#" class="btn btn-primary"><i class="fa-solid fa-pencil"></i></i></a>
+                    <a href="#" class="btn btn-danger"><i class="fa-solid fa-xmark"></i></i></i></a>
+                </td>
+                </tr>
 
             @endforeach
 
