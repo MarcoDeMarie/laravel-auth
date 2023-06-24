@@ -19,7 +19,7 @@
 
     <h2>Creazione post</h2>
 
-    <form action="{{ route('admin.posts.store') }}" method="POST">
+    <form action="{{ route('admin.posts.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="mb-3">
@@ -56,6 +56,20 @@
                 @enderror
 
         </div>
+
+        <div class="mb-3">
+
+            <label for="image" class="form-label">immaggine</label>
+
+            <input
+                type="file"
+                name="image"
+                class="form-control"
+                id="image"
+            >
+
+        </div>
+
 
         <div class="mb-3">
 

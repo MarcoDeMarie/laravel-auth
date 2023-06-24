@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Http\Requests\PostRequest;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -47,6 +48,15 @@ class PostController extends Controller
         $form_data['slug'] = Post::generateSlug($form_data['title']);
         $form_data['date'] = date('Y-m-d');
 
+        if(array_key_exists('image', $form_data)){
+
+            if($post->image_path){
+                Storage::disk('public')->delete($post->image_path);
+            }
+
+            $form_data['image_original_name'] = $request->file('image')->getClientOriginalName();
+            $form_data['image_path'] = Storage::put('uploads', $form_data['image']);
+        }
 
         $new_post = new Post();
         $new_post->fill($form_data);
@@ -97,8 +107,13 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        //
+        if($post->image_path){
+            Storage::disk('public')->delete($post->image_path);
+        }
+        $post->delete();
+
+        return redirect()->route('admin.posts.index')->with('deleted', 'Post eliminato correttamente');
     }
 }

@@ -3,6 +3,16 @@
 @section('content')
 
 <div class="container p-5">
+
+    @if(session('deleted'))
+
+    <div class="alert alert-success" role="alert">
+        {{ session('deleted') }}
+    </div>
+
+    @endif
+
+
     <h2 class="fs-4 text-secondary my-4">
         Posts
     </h2>
@@ -32,8 +42,18 @@
                 <td>{{ date_format($date, 'd/m/Y') }}</td>
                 <td>
                     <a href="{{ route('admin.posts.show', $post) }}" class="btn btn-success"><i class="fa-solid fa-eye"></i></a>
-                    <a href="#" class="btn btn-primary"><i class="fa-solid fa-pencil"></i></i></a>
-                    <a href="#" class="btn btn-danger"><i class="fa-solid fa-xmark"></i></i></i></a>
+                    <a href="#" class="btn btn-primary"><i class="fa-solid fa-pencil"></i></a>
+
+                    <form
+                        action="{{ route('admin.posts.destroy', $post) }}"
+                        method="POST"
+                        onsubmit="return confirm('confermi l\'eliminazione del post: {{ $post->title }}?')"
+                        >
+
+                        @csrf
+                        @method('DELETE')
+                        <a href="#" class="btn btn-danger" type="submit"><i class="fa-solid fa-xmark"></i></i></a>
+                    </form>
                 </td>
                 </tr>
 
